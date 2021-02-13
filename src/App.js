@@ -4,12 +4,13 @@ import Appointment from './components/appointments/Appointment'
 
 function App() {
 
-  let  initialAppointments = localStorage.getItem('appointments');
-  if(initialAppointments === ''){
+  let  initialAppointments = JSON.parse(localStorage.getItem('appointments'));
+  
+  if(initialAppointments === '[]' || !Array.isArray(initialAppointments)){
     initialAppointments = []
   }
 
-  const [appointments, setAppointments] = useState(JSON.parse(initialAppointments))
+  const [appointments, setAppointments] = useState(initialAppointments)
 
   useEffect(()=>{
     localStorage.setItem('appointments', JSON.stringify(appointments))
